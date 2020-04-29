@@ -1,6 +1,7 @@
 import React from 'react';
 import * as THREE from 'three';
 class App extends React.Component {
+
   constructor(props){
     super(props)
     this.state={
@@ -8,6 +9,7 @@ class App extends React.Component {
       y: 0.01
     }
   }
+  
   componentDidMount(){
     const width = this.mount.clientWidth
     const height = this.mount.clientHeight
@@ -24,28 +26,34 @@ class App extends React.Component {
     this.scene.add(this.cube)
     this.start()
   }
-componentWillUnmount(){
+
+  componentWillUnmount(){
     this.stop()
     this.mount.removeChild(this.renderer.domElement)
   }
-start = () => {
+
+  start = () => {
     if (!this.frameId) {
       this.frameId = requestAnimationFrame(this.animate)
     }
   }
-stop = () => {
+
+  stop = () => {
     cancelAnimationFrame(this.frameId)
   }
-animate = () => {
+
+  animate = () => {
    this.cube.rotation.x += this.state.x
    this.cube.rotation.y += this.state.y
    this.renderScene()
    this.frameId = window.requestAnimationFrame(this.animate)
- }
-renderScene = () => {
+  }
+
+  renderScene = () => {
   this.renderer.render(this.scene, this.camera)
-}
-render(){
+  }
+  
+  render(){
     return(
       <div className="container">
       <div className="row">
