@@ -15,7 +15,7 @@ class App extends React.Component {
     this.camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 )
     this.camera.position.z = 4
     this.renderer = new THREE.WebGLRenderer({ antialias: true })
-    this.renderer.setClearColor('#000000')
+    this.renderer.setClearColor('#f1f1f1')
     this.renderer.setSize(width, height)
     this.mount.appendChild(this.renderer.domElement)
     const geometry = new THREE.BoxGeometry(1, 1, 1)
@@ -47,19 +47,18 @@ renderScene = () => {
 }
 render(){
     return(
-      <>
-      <div
-        style={{ width: '1070px', height: '400px', marginLeft:'10%', marginRight:'10%', marginTop:'10%' }}
-        ref={(mount) => { this.mount = mount }}
-      />
-      <div style={{width: '100%'}}>
-      <center>
-      <button onClick={(e)=>this.setState({x: (this.state.x+0.01), y: (this.state.y+0.01) })}>INCREASE SPEED</button>
-      <button onClick={(e)=>this.setState({x: (this.state.x-0.01), y: (this.state.y-0.01) })}>DECREASE SPEED</button>
-      <p>Add Factor: X:{this.state.x + ', Y:' + this.state.y}</p>
-      </center>
+      <div className="container">
+      <div className="row">
+      <div className="col-sm-6">
+        <div style={{margin:'10%'}}>
+          <button style={{margin:'5px'}} onClick={()=>this.setState({x: (this.state.x+0.01), y: (this.state.y+0.01) })}>INCREASE SPEED</button><br />
+          <button style={{margin:'5px'}} onClick={()=>this.setState({x: (this.state.x-0.01), y: (this.state.y-0.01) })}>DECREASE SPEED</button><br />
+          <p>X:{this.state.x + ', Y:' + this.state.y}</p>
+        </div>
       </div>
-      </>
+      <div className="col-sm-6" style={{ width: '400px', height: '400px' }} ref={(mount) => { this.mount = mount }}/>
+      </div>
+      </div>
     )
   }
 }
