@@ -53,7 +53,7 @@ render(){
         <div style={{margin:'10%'}}>
           <button style={{margin:'5px'}} onClick={()=>this.setState({x: (this.state.x+0.01), y: (this.state.y+0.01) })}>INCREASE SPEED</button><br />
           <button style={{margin:'5px'}} onClick={()=>this.setState({x: (this.state.x-0.01), y: (this.state.y-0.01) })}>DECREASE SPEED</button><br />
-          <p>X:{this.state.x + ', Y:' + this.state.y}</p>
+          <p>Increase Rate(axis): X:{this.state.x + ', Y:' + this.state.y}</p>
         </div>
       </div>
       <div className="col-sm-6" style={{ width: '400px', height: '400px' }} ref={(mount) => { this.mount = mount }}/>
