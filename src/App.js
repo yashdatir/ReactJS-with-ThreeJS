@@ -1,6 +1,7 @@
 import React from 'react';
 import * as THREE from 'three';
 class App extends React.Component {
+
   constructor(props){
     super(props)
     this.state={
@@ -8,6 +9,7 @@ class App extends React.Component {
       y: 0.01
     }
   }
+  
   componentDidMount(){
     const width = this.mount.clientWidth
     const height = this.mount.clientHeight
@@ -15,7 +17,7 @@ class App extends React.Component {
     this.camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 )
     this.camera.position.z = 4
     this.renderer = new THREE.WebGLRenderer({ antialias: true })
-    this.renderer.setClearColor('#000000')
+    this.renderer.setClearColor('#f1f1f1')
     this.renderer.setSize(width, height)
     this.mount.appendChild(this.renderer.domElement)
     const geometry = new THREE.BoxGeometry(1, 1, 1)
@@ -24,42 +26,47 @@ class App extends React.Component {
     this.scene.add(this.cube)
     this.start()
   }
-componentWillUnmount(){
+
+  componentWillUnmount(){
     this.stop()
     this.mount.removeChild(this.renderer.domElement)
   }
-start = () => {
+
+  start = () => {
     if (!this.frameId) {
       this.frameId = requestAnimationFrame(this.animate)
     }
   }
-stop = () => {
+
+  stop = () => {
     cancelAnimationFrame(this.frameId)
   }
-animate = () => {
+
+  animate = () => {
    this.cube.rotation.x += this.state.x
    this.cube.rotation.y += this.state.y
    this.renderScene()
    this.frameId = window.requestAnimationFrame(this.animate)
- }
-renderScene = () => {
+  }
+
+  renderScene = () => {
   this.renderer.render(this.scene, this.camera)
-}
-render(){
+  }
+  
+  render(){
     return(
-      <>
-      <div
-        style={{ width: '1070px', height: '400px', marginLeft:'10%', marginRight:'10%', marginTop:'10%' }}
-        ref={(mount) => { this.mount = mount }}
-      />
-      <div style={{width: '100%'}}>
-      <center>
-      <button onClick={(e)=>this.setState({x: (this.state.x+0.01), y: (this.state.y+0.01) })}>INCREASE SPEED</button>
-      <button onClick={(e)=>this.setState({x: (this.state.x-0.01), y: (this.state.y-0.01) })}>DECREASE SPEED</button>
-      <p>Add Factor: X:{this.state.x + ', Y:' + this.state.y}</p>
-      </center>
+      <div className="container">
+      <div className="row">
+      <div className="col-sm-6">
+        <div style={{margin:'10%'}}>
+          <button style={{margin:'5px'}} onClick={()=>this.setState({x: (this.state.x+0.01), y: (this.state.y+0.01) })}>INCREASE SPEED</button><br />
+          <button style={{margin:'5px'}} onClick={()=>this.setState({x: (this.state.x-0.01), y: (this.state.y-0.01) })}>DECREASE SPEED</button><br />
+          <p>Increase Rate(axis): X:{this.state.x + ', Y:' + this.state.y}</p>
+        </div>
       </div>
-      </>
+      <div className="col-sm-6" style={{ width: '400px', height: '400px' }} ref={(mount) => { this.mount = mount }}/>
+      </div>
+      </div>
     )
   }
 }
